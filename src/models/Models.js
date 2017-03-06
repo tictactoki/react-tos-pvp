@@ -4,6 +4,7 @@
 import React from 'react';
 import $ from 'jquery';
 
+
 export default class MainStat extends React.Component {
 
     constructor(props) {
@@ -15,7 +16,8 @@ export default class MainStat extends React.Component {
             spr: 0,
             dex: 0,
             circleName: "Archer",
-            level: 4
+            level: 4,
+            stuffId: "58b58a0a4d00004d00a9bc9e"
         };
         this.addBuild = this.addBuild.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -35,20 +37,8 @@ export default class MainStat extends React.Component {
     addBuild(event) {
         event.preventDefault();
         console.log(this.state);
-        var t = JSON.stringify({
-            mainStat: {
-                str: parseInt(this.state.str),
-                con: parseInt(this.state.con),
-                int: parseInt(this.state.int),
-                spr: parseInt(this.state.spr),
-                dex: parseInt(this.state.dex)
-            },
-            circleName: "Archer",
-            level: 4
-        });
-        console.log(t);
         $.ajax({
-            type: "POST",
+            type: "PUT",
             contentType: "application/json",
             url: "http://localhost:8090/builds",
             data: JSON.stringify({
@@ -60,7 +50,8 @@ export default class MainStat extends React.Component {
                     dex: parseInt(this.state.dex)
                 },
                 circleName: "Archer",
-                level: 4
+                level: 4,
+                stuffId: "58b58a0a4d00004d00a9bc9e"
             }),
             success: function (data, status, xhr) {
                 console.log("success");
