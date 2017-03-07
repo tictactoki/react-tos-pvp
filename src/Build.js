@@ -3,6 +3,7 @@
  */
 import React, { Component } from 'react';
 import $ from 'jquery';
+import MainStat from './models/MainStat';
 
 
 export default class Build extends Component {
@@ -12,25 +13,51 @@ export default class Build extends Component {
         this.state = {
             circles: null
         }
-        this.getCircles = this.getCircles.bind(this);
+        this.getFirstCircles = this.getFirstCircles.bind(this);
+        this.computeCircle = this.computeCircle.bind(this);
     }
 
-    getCircles() {
-        $.get(this.props.circles, function(data,status,xhr) {
-            if(xhr.status == 200 && data != null) {
-                this.state.circles = data;
+    getFirstCircles() {
+
+    }
+
+    computeCircle(build, event) {
+        //event.preventDefault();
+        console.log(build);
+        $.ajax({
+            type: "POST",
+            contentType: "application/json",
+            url: "http://localhost:8090/circles",
+            data: JSON.stringify(build),
+            success: function (data, status, xhr) {
+                console.log("success");
+                console.log(data);
+            },
+            error: function (xhr, status, error) {
+                console.log("error");
+                console.log(error);
+                console.log(status);
+                console.log(xhr);
             }
-        }.bind(this))
-    }
+        });
 
+    }
 
     componentDidMount() {
-        this.getCircles();
+        $.get(this.props.circles, function(data,status,xhr) {
+            if(xhr.status == 200 && data != null) {
+                console.log(data);
+                this.setState({ circles: data});
+                console.log(this.state.circles);
+            }
+        }.bind(this));
     }
 
     render() {
         return(
-            <div></div>
+            <div>
+                <MainStat computeCircle={this.computeCircle} firstCircles={this.state.circles}/>
+            </div>
         );
     }
 
