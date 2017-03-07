@@ -50,6 +50,7 @@ export default class MainStat extends React.Component {
             mainStat: this.state.mainStat,
             stuffId: this.state.stuffId
         }
+        console.log(this.props.firstCircles);
         this.props.computeCircle(build);
     }
 

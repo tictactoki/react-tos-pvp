@@ -18,7 +18,12 @@ export default class Build extends Component {
     }
 
     getFirstCircles() {
-
+        $.get(this.props.circles, function(data,status,xhr) {
+            if(xhr.status == 200 && data != null) {
+                this.setState({circles:data});
+            }
+        }.bind(this));
+        console.log(this.state);
     }
 
     computeCircle(build, event) {
@@ -44,21 +49,22 @@ export default class Build extends Component {
     }
 
     componentDidMount() {
-        $.get(this.props.circles, function(data,status,xhr) {
-            if(xhr.status == 200 && data != null) {
-                console.log(data);
-                this.setState({ circles: data});
-                console.log(this.state.circles);
-            }
-        }.bind(this));
+        this.getFirstCircles();
     }
 
     render() {
-        return(
-            <div>
-                <MainStat computeCircle={this.computeCircle} firstCircles={this.state.circles}/>
-            </div>
-        );
+        if(this.state.circles != null) {
+            return (
+                <div>
+                    <MainStat computeCircle={this.computeCircle} firstCircles={this.state.circles}/>
+                </div>
+            );
+        }
+        else {
+            return (
+                <div></div>
+            );
+        }
     }
 
 
