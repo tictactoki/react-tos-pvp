@@ -69,6 +69,58 @@ export class OffensiveStat extends React.Component {
 
 }
 
+export class BasicStat extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            basicStat: null
+        };
+    }
+
+    componentWillMount() {
+        this.setState({basicStat: this.props.basicStat});
+    }
+
+
+    render() {
+        if (this.state.basicStat == null) {
+            return (<div></div>);
+        }
+        else {
+            return (
+                <tbody className="basic-stat">
+                <tr>
+                    <td>HP</td>
+                    <td>{this.state.basicStat.hp}</td>
+                </tr>
+                <tr>
+                    <td>SP</td>
+                    <td>{this.state.basicStat.sp}</td>
+                </tr>
+                <tr>
+                    <td>HP Recovery</td>
+                    <td>{this.state.basicStat.hpRecovery}</td>
+                </tr>
+                <tr>
+                    <td>SP Recovery</td>
+                    <td>{this.state.basicStat.spRecovery}</td>
+                </tr>
+                <tr>
+                    <td>Maximum Carry Weight</td>
+                    <td>{this.state.basicStat.maximumCarryWeight}</td>
+                </tr>
+                <tr>
+                    <td>Maximum Stamina</td>
+                    <td>{this.state.basicStat.maximumStamina}</td>
+                </tr>
+                </tbody>
+            );
+        }
+    }
+
+}
+
 export class DefensiveStat extends React.Component {
 
     constructor(props) {

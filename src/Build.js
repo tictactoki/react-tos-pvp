@@ -4,7 +4,7 @@
 import React, {Component} from 'react';
 import $ from 'jquery';
 import MainStat from './models/MainStat';
-import {OffensiveStat, DefensiveStat} from './models/Stat';
+import {OffensiveStat, DefensiveStat, BasicStat} from './models/Stat';
 
 
 export default class Build extends Component {
@@ -62,10 +62,11 @@ export default class Build extends Component {
         }
         else if (this.state.circles != null && this.state.stat != null) {
             return(
-                <tbody>
+                <table>
+                    <BasicStat basicStat={this.state.stat.basicStat} />
                     <OffensiveStat offensiveStat={this.state.stat.offensiveStat} />
                     <DefensiveStat defensiveStat={this.state.stat.defensiveStat} />
-                </tbody>
+                </table>
             );
         }
         else {
