@@ -4,12 +4,15 @@
 import React from 'react';
 import $ from 'jquery';
 import Select from 'react-select';
+import 'react-select/dist/react-select.css';
+
 
 export default class MainStat extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            select: null,
             firstCircles: this.props.firstCircles,
             level: 1,
             mainStat: {
@@ -25,6 +28,8 @@ export default class MainStat extends React.Component {
         this.computeStats = this.computeStats.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleMainStat = this.handleMainStat.bind(this);
+        this.transformSelect = this.transformSelect.bind(this);
+        this.handleSelect = this.handleSelect.bind(this);
     }
 
     handleChange(field, event) {
@@ -50,10 +55,33 @@ export default class MainStat extends React.Component {
         this.props.computeCircle(build);
     }
 
+    transformSelect() {
+        let select = [];
+        this.state.firstCircles.map(function(fc) {
+            select.push({value:fc.mainStat, label: fc.circleName});
+        })
+        this.setState({select: select});
+    }
+
+    handleSelect(select) {
+        console.log(select);
+        this.setState({mainStat: select.value, level: 1});
+    }
+
+    componentWillMount() {
+        this.transformSelect();
+    }
+
     render() {
         return (
             <form onSubmit={this.computeStats}>
                 <div>
+                    <Select
+                        name="form-field-name"
+                        value={this.state.select[0]}
+                        options={this.state.select}
+                        onChange={this.handleSelect}
+                        />
                     <div>
                         <label>level</label>
                         <input type="number" value={this.state.level} onChange={this.handleChange.bind(this, 'level')}/>
