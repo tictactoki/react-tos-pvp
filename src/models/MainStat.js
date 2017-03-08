@@ -12,6 +12,7 @@ export default class MainStat extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            label: this.props.firstCircles[0].label,
             select: null,
             firstCircles: this.props.firstCircles,
             level: 1,
@@ -22,13 +23,11 @@ export default class MainStat extends React.Component {
                 spr: 0,
                 dex: 0
             },
-            circleName: "Cleric",
             stuffId: null
         };
         this.computeStats = this.computeStats.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleMainStat = this.handleMainStat.bind(this);
-        this.transformSelect = this.transformSelect.bind(this);
         this.handleSelect = this.handleSelect.bind(this);
     }
 
@@ -41,13 +40,13 @@ export default class MainStat extends React.Component {
     handleMainStat(field, event) {
         let obj = this.state.mainStat;
         obj[field] = parseInt(event.target.value);
-        this.setState({ mainStat: obj });
+        this.setState({mainStat: obj});
     }
 
     computeStats(event) {
         event.preventDefault();
         var build = {
-            circleName: this.state.circleName,
+            circleName: this.state.label,
             level: this.state.level,
             mainStat: this.state.mainStat,
             stuffId: this.state.stuffId
@@ -55,21 +54,10 @@ export default class MainStat extends React.Component {
         this.props.computeCircle(build);
     }
 
-    transformSelect() {
-        let select = [];
-        this.state.firstCircles.map(function(fc) {
-            select.push({value:fc.mainStat, label: fc.circleName});
-        })
-        this.setState({select: select});
-    }
-
     handleSelect(select) {
-        console.log(select);
-        this.setState({mainStat: select.value, level: 1});
-    }
-
-    componentWillMount() {
-        this.transformSelect();
+        if (select != null) {
+            this.setState({label: select.label, mainStat: select.value, level: 1});
+        }
     }
 
     render() {
@@ -78,33 +66,38 @@ export default class MainStat extends React.Component {
                 <div>
                     <Select
                         name="form-field-name"
-                        value={this.state.select[0]}
-                        options={this.state.select}
+                        value={this.state.label}
+                        options={this.props.firstCircles}
                         onChange={this.handleSelect}
-                        />
+                    />
                     <div>
                         <label>level</label>
                         <input type="number" value={this.state.level} onChange={this.handleChange.bind(this, 'level')}/>
                     </div>
                     <div>
                         <label>str</label>
-                        <input type="number" value={this.state.mainStat.str} onChange={this.handleMainStat.bind(this, 'str')}/>
+                        <input type="number" value={this.state.mainStat.str}
+                               onChange={this.handleMainStat.bind(this, 'str')}/>
                     </div>
                     <div>
                         <label>con</label>
-                        <input type="text" value={this.state.mainStat.con} onChange={this.handleMainStat.bind(this, 'con')}/>
+                        <input type="text" value={this.state.mainStat.con}
+                               onChange={this.handleMainStat.bind(this, 'con')}/>
                     </div>
                     <div>
                         <label>int</label>
-                        <input type="text" value={this.state.mainStat.int} onChange={this.handleMainStat.bind(this, 'int')}/>
+                        <input type="text" value={this.state.mainStat.int}
+                               onChange={this.handleMainStat.bind(this, 'int')}/>
                     </div>
                     <div>
                         <label>spr</label>
-                        <input type="text" value={this.state.mainStat.spr} onChange={this.handleMainStat.bind(this, 'spr')}/>
+                        <input type="text" value={this.state.mainStat.spr}
+                               onChange={this.handleMainStat.bind(this, 'spr')}/>
                     </div>
                     <div>
                         <label>dex</label>
-                        <input type="text" value={this.state.mainStat.dex} onChange={this.handleMainStat.bind(this, 'dex')}/>
+                        <input type="text" value={this.state.mainStat.dex}
+                               onChange={this.handleMainStat.bind(this, 'dex')}/>
                     </div>
                     <input type="submit" value="compute"/>
                 </div>
