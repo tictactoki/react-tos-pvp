@@ -31,33 +31,24 @@ export default class MainStat extends React.Component {
         let obj = {};
         obj[field] = parseInt(event.target.value);
         this.setState(obj);
-        console.log(this.state);
     }
 
     handleMainStat(field, event) {
         let obj = this.state.mainStat;
         obj[field] = parseInt(event.target.value);
         this.setState({ mainStat: obj });
-        console.log(this.state);
     }
 
     computeStats(event) {
         event.preventDefault();
-        console.log(this.state.firstCircles);
         var build = {
             circleName: this.state.circleName,
             level: this.state.level,
             mainStat: this.state.mainStat,
             stuffId: this.state.stuffId
         }
-        console.log(this.props.firstCircles);
         this.props.computeCircle(build);
     }
-
-    componentDidMount() {
-        console.log(this.props.firstCircles);
-    }
-
 
     render() {
         return (

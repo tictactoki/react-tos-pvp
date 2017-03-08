@@ -4,7 +4,7 @@
 import React, {Component} from 'react';
 import $ from 'jquery';
 import MainStat from './models/MainStat';
-import OffensiveStat from './models/Stat';
+import {OffensiveStat, DefensiveStat} from './models/Stat';
 
 
 export default class Build extends Component {
@@ -13,7 +13,7 @@ export default class Build extends Component {
         super(props);
         this.state = {
             circles: null,
-            offStat: null
+            stat: null
         }
         this.getFirstCircles = this.getFirstCircles.bind(this);
         this.computeCircle = this.computeCircle.bind(this);
@@ -34,9 +34,9 @@ export default class Build extends Component {
             url: "http://localhost:8090/circles",
             data: JSON.stringify(build),
             success: function (data, status, xhr) {
-                console.log("success");
-                console.log(data);
-                this.setState({offStat: data.offensiveStat});
+                if(xhr.status == 200) {
+                    this.setState({stat: data});
+                }
             }.bind(this),
             error: function (xhr, status, error) {
                 console.log("error");
@@ -53,18 +53,19 @@ export default class Build extends Component {
     }
 
     render() {
-        if (this.state.circles != null && this.state.offStat == null) {
+        if (this.state.circles != null && this.state.stat == null) {
             return (
                 <div>
                     <MainStat computeCircle={this.computeCircle} firstCircles={this.state.circles}/>
                 </div>
             );
         }
-        else if (this.state.circles != null && this.state.offStat != null) {
+        else if (this.state.circles != null && this.state.stat != null) {
             return(
-                <div>
-                    <OffensiveStat offensiveStat={this.state.offStat} />
-                </div>
+                <tbody>
+                    <OffensiveStat offensiveStat={this.state.stat.offensiveStat} />
+                    <DefensiveStat defensiveStat={this.state.stat.defensiveStat} />
+                </tbody>
             );
         }
         else {
