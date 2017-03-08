@@ -13,7 +13,10 @@ export default class Build extends Component {
         super(props);
         this.state = {
             circles: null,
-            stat: null
+            c1: null,
+            e1: null,
+            c2: null,
+            e2: null
         }
         this.getFirstCircles = this.getFirstCircles.bind(this);
         this.computeCircle = this.computeCircle.bind(this);
@@ -27,15 +30,19 @@ export default class Build extends Component {
         }.bind(this));
     }
 
-    computeCircle(build, event) {
+    computeCircle(b1, b2, event) {
+        let pvp = {
+            p1: b1,
+            p2: b2
+        };
         $.ajax({
             type: "POST",
             contentType: "application/json",
-            url: "http://localhost:8090/circles",
-            data: JSON.stringify(build),
+            url: "http://localhost:8090/pvp",
+            data: JSON.stringify(pvp),
             success: function (data, status, xhr) {
-                if(xhr.status == 200) {
-                    this.setState({stat: data});
+                if (xhr.status == 200) {
+                    this.setState({c1: data.c1, e1: data.e1, c2: data.c2, e2: data.e2});
                 }
             }.bind(this),
             error: function (xhr, status, error) {
@@ -53,20 +60,27 @@ export default class Build extends Component {
     }
 
     render() {
-        if (this.state.circles != null && this.state.stat == null) {
+        if (this.state.c1 != null && this.state.c2 != null) {
+            return (
+                <div>
+                    <table className="first-circle tb-data">
+                        <BasicStat basicStat={this.state.c1.basicStat}/>
+                        <OffensiveStat offensiveStat={this.state.c1.offensiveStat}/>
+                        <DefensiveStat defensiveStat={this.state.c1.defensiveStat}/>
+                    </table>
+                    <table className="second-circle tb-data">
+                        <BasicStat basicStat={this.state.c2.basicStat}/>
+                        <OffensiveStat offensiveStat={this.state.c2.offensiveStat}/>
+                        <DefensiveStat defensiveStat={this.state.c2.defensiveStat}/>
+                    </table>
+                </div>
+            );
+        }
+        else if (this.state.circles != null) {
             return (
                 <div>
                     <MainStat computeCircle={this.computeCircle} firstCircles={this.state.circles}/>
                 </div>
-            );
-        }
-        else if (this.state.circles != null && this.state.stat != null) {
-            return(
-                <table>
-                    <BasicStat basicStat={this.state.stat.basicStat} />
-                    <OffensiveStat offensiveStat={this.state.stat.offensiveStat} />
-                    <DefensiveStat defensiveStat={this.state.stat.defensiveStat} />
-                </table>
             );
         }
         else {

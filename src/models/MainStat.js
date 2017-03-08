@@ -61,23 +61,18 @@ export default class MainStat extends React.Component {
     }
 
     handleMainStat(player, field, event) {
-        console.log(player,field);
         if (player == 1) {
-            console.log("first");
             let fp = this.state.firstPlayer;
             let obj = fp.mainStat;
             obj[field] = parseInt(event.target.value);
             fp['mainStat'] = obj;
-            console.log(fp);
             this.setState({firstPlayer: fp});
         }
         else {
-            console.log("second");
             let sp = this.state.secondPlayer;
             let obj = sp.mainStat;
             obj[field] = parseInt(event.target.value);
             sp['mainStat'] = obj;
-            console.log(sp);
             this.setState({secondPlayer: sp});
         }
 
@@ -86,23 +81,27 @@ export default class MainStat extends React.Component {
 
     computeStats(event) {
         event.preventDefault();
-        var build = {
-            circleName: this.state.label,
-            level: this.state.level,
-            mainStat: this.state.mainStat,
-            stuffId: this.state.stuffId
-        }
-        this.props.computeCircle(build);
+        let b1 = {
+            circleName: this.state.firstPlayer.label,
+            level: this.state.firstPlayer.level,
+            mainStat: this.state.firstPlayer.mainStat,
+            stuffId: this.state.firstPlayer.stuffId
+        };
+        let b2 = {
+            circleName: this.state.secondPlayer.label,
+            level: this.state.secondPlayer.level,
+            mainStat: this.state.secondPlayer.mainStat,
+            stuffId: this.state.secondPlayer.stuffId
+        };
+        this.props.computeCircle(b1,b2);
     }
 
     handleFirstSelect(select) {
         if (select != null) {
-            console.log("in select");
             let fp = this.state.firstPlayer;
             fp['label'] = select.label;
-            fp['mainStat']= select.value;
+            fp['mainStat'] = select.value;
             fp['level'] = 1;
-            console.log(fp);
             this.setState({firstPlayer: fp});
         }
     }
@@ -111,15 +110,13 @@ export default class MainStat extends React.Component {
         if (select != null) {
             let sp = this.state.secondPlayer;
             sp['label'] = select.label;
-            sp['mainStat']= select.value;
+            sp['mainStat'] = select.value;
             sp['level'] = 1;
             this.setState({secondPlayer: sp});
         }
     }
 
     render() {
-        console.log(this.state.firstPlayer);
-        console.log(this.state.secondPlayer);
         return (
             <form onSubmit={this.computeStats}>
                 <div>
@@ -146,19 +143,22 @@ export default class MainStat extends React.Component {
                         <th>First Player</th>
                     </tr>
                     </thead>
-                    <tbody className="firstPlayer-mainStat">
+                    <tbody className="first-mainStat">
                     <tr>
                         <td>
                             <label>level</label>
-                            <input type="number" value={this.state.firstPlayer.level} onChange={this.handleChange.bind(this, 1,'level')}/>
+                            <input type="number" value={this.state.firstPlayer.level}
+                                   onChange={this.handleChange.bind(this, 1,'level')}/>
                         </td>
                         <td>
                             <label>str</label>
-                            <input type="number" value={this.state.firstPlayer.mainStat.str} onChange={this.handleMainStat.bind(this, 1, 'str')}/>
+                            <input type="number" value={this.state.firstPlayer.mainStat.str}
+                                   onChange={this.handleMainStat.bind(this, 1, 'str')}/>
                         </td>
                         <td>
                             <label>con</label>
-                            <input type="number" value={this.state.firstPlayer.mainStat.con} onChange={this.handleMainStat.bind(this, 1,'con')}/>
+                            <input type="number" value={this.state.firstPlayer.mainStat.con}
+                                   onChange={this.handleMainStat.bind(this, 1,'con')}/>
                         </td>
                         <td>
                             <label>int</label>
@@ -167,11 +167,13 @@ export default class MainStat extends React.Component {
                         </td>
                         <td>
                             <label>spr</label>
-                            <input type="number" value={this.state.firstPlayer.mainStat.spr} onChange={this.handleMainStat.bind(this, 1, 'spr')}/>
+                            <input type="number" value={this.state.firstPlayer.mainStat.spr}
+                                   onChange={this.handleMainStat.bind(this, 1, 'spr')}/>
                         </td>
                         <td>
                             <label>dex</label>
-                            <input type="number" value={this.state.firstPlayer.mainStat.dex} onChange={this.handleMainStat.bind(this, 1,'dex')}/>
+                            <input type="number" value={this.state.firstPlayer.mainStat.dex}
+                                   onChange={this.handleMainStat.bind(this, 1,'dex')}/>
                         </td>
                     </tr>
                     </tbody>
@@ -182,7 +184,7 @@ export default class MainStat extends React.Component {
                         <th>Second Player</th>
                     </tr>
                     </thead>
-                    <tbody className="secondPlayer-mainStat">
+                    <tbody className="second-mainStat">
                     <tr>
                         <td>
                             <label>level</label>
@@ -217,6 +219,7 @@ export default class MainStat extends React.Component {
                     </tr>
                     </tbody>
                 </table>
+                <input type="submit" value="compute"/>
             </form>
         );
     }
