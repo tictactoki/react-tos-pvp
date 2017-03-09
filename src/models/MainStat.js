@@ -14,7 +14,6 @@ export default class MainStat extends React.Component {
         this.state = {
             firstPlayer: {
                 label: this.props.firstCircles[0].label,
-                select: null,
                 level: 1,
                 mainStat: {
                     str: 0,
@@ -27,7 +26,6 @@ export default class MainStat extends React.Component {
             },
             secondPlayer: {
                 label: this.props.firstCircles[0].label,
-                select: null,
                 level: 1,
                 mainStat: {
                     str: 0,
@@ -49,7 +47,6 @@ export default class MainStat extends React.Component {
     handleChange(player, field, event) {
         if (player == 1) {
             let fp = this.state.firstPlayer;
-            console.log(fp)
             fp[field] = parseInt(event.target.value);
             this.setState({firstPlayer: fp});
         }
