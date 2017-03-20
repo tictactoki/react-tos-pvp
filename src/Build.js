@@ -99,7 +99,7 @@ export default class Build extends Component {
             return (
                 <form onSubmit={this.computeStats}>
                     <div>
-                        <MStat updatePlayer={this.updatePlayer} computeCircle={this.computeCircle}
+                        <MainStat updatePlayer={this.updatePlayer} computeCircle={this.computeCircle}
                                firstCircles={this.state.circles} classSelect="first" number={1}/>
                         <table className="first-circle tb-data">
                             <BasicStat basicStat={this.state.c1.basicStat}/>
@@ -107,7 +107,7 @@ export default class Build extends Component {
                             <DefensiveStat defensiveStat={this.state.c1.defensiveStat}/>
                         </table>
                         <Damage className="first-damage" damage={this.state.d1} dodge={this.state.e1}/>
-                        <MStat updatePlayer={this.updatePlayer} computeCircle={this.computeCircle}
+                        <MainStat updatePlayer={this.updatePlayer} computeCircle={this.computeCircle}
                                firstCircles={this.state.circles} classSelect="second" number={2}/>
                         <table className="second-circle tb-data">
                             <BasicStat basicStat={this.state.c2.basicStat}/>
@@ -124,9 +124,9 @@ export default class Build extends Component {
             return (
                 <form onSubmit={this.computeStats}>
                     <div>
-                        <MStat updatePlayer={this.updatePlayer} computeCircle={this.computeCircle}
+                        <MainStat updatePlayer={this.updatePlayer} computeCircle={this.computeCircle}
                                firstCircles={this.state.circles} classSelect="second" number={1}/>
-                        <MStat updatePlayer={this.updatePlayer} computeCircle={this.computeCircle}
+                        <MainStat updatePlayer={this.updatePlayer} computeCircle={this.computeCircle}
                                firstCircles={this.state.circles} classSelect="second" number={2}/>
                     </div>
                     <input type="submit" value="compute"/>
