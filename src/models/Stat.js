@@ -3,6 +3,30 @@
  */
 import React from 'react';
 
+export class Damage extends React.Component {
+
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        if (this.props.dodge == null || this.props.damage == null) {
+            return (<div></div>);
+        }
+        else {
+            return (
+                <div className="damage">
+                    <fieldset>
+                        <legend>Pvp stats</legend>
+                        <label>Damage: {this.props.damage}</label>
+                        <br />
+                        <label>Dodge percentage: {this.props.dodge}</label>
+                    </fieldset>
+                </div>
+            );
+        }
+    }
+}
 
 export class OffensiveStat extends React.Component {
 

@@ -4,7 +4,7 @@
 import React, {Component} from 'react';
 import $ from 'jquery';
 import MainStat from './models/MainStat';
-import {OffensiveStat, DefensiveStat, BasicStat} from './models/Stat';
+import {OffensiveStat, DefensiveStat, BasicStat, Damage} from './models/Stat';
 
 
 export default class Build extends Component {
@@ -15,8 +15,10 @@ export default class Build extends Component {
             circles: null,
             c1: null,
             e1: null,
+            d1: null,
             c2: null,
-            e2: null
+            e2: null,
+            d2: null
         }
         this.getFirstCircles = this.getFirstCircles.bind(this);
         this.computeCircle = this.computeCircle.bind(this);
@@ -42,7 +44,8 @@ export default class Build extends Component {
             data: JSON.stringify(pvp),
             success: function (data, status, xhr) {
                 if (xhr.status == 200) {
-                    this.setState({c1: data.c1, e1: data.e1, c2: data.c2, e2: data.e2});
+                    console.log(data);
+                    this.setState({c1: data.c1, e1: data.e1, d1: data.d1, c2: data.c2, e2: data.e2, d2: data.d2});
                 }
             }.bind(this),
             error: function (xhr, status, error) {
@@ -68,11 +71,13 @@ export default class Build extends Component {
                         <OffensiveStat offensiveStat={this.state.c1.offensiveStat}/>
                         <DefensiveStat defensiveStat={this.state.c1.defensiveStat}/>
                     </table>
+                    <Damage className="first-damage" damage={this.state.d1} dodge={this.state.e1} />
                     <table className="second-circle tb-data">
                         <BasicStat basicStat={this.state.c2.basicStat}/>
                         <OffensiveStat offensiveStat={this.state.c2.offensiveStat}/>
                         <DefensiveStat defensiveStat={this.state.c2.defensiveStat}/>
                     </table>
+                    <Damage className="second-damage" damage={this.state.d2} dodge={this.state.e2} />
                 </div>
             );
         }
