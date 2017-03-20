@@ -31,7 +31,7 @@ export class MStat extends React.Component {
 
     handleChange(field, event) {
         let obj = this.state.player;
-        obj[field] = event.target.value;
+        obj[field] = parseInt(event.target.value);
         this.setState({player: obj});
     }
 
