@@ -3,3 +3,62 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+form {
+  position: relative;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+li input {
+  width: 25px;
+}
+
+.main-stat {
+  position: relative;
+  top: 40px;
+  left: 40px;
+  margin-bottom: 5%;
+}
+
+.Select-control {
+  width: 120px;
+}
+
+.is-open {
+  width: 120px;
+}
+
+.is-searchable {
+  width: 120px;
+}
+
+.first {
+
+}
+
+.second {
+
+}
+
+.first-select {
+
+}
+
+.second-select {
+
+}
+
+.first-circle {
+
+}
+
+
+.second-circle {
+
+}
+
+
+.tb-data {
+  position: relative;
+}

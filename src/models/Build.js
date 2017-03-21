@@ -3,8 +3,8 @@
  */
 import React, {Component} from 'react';
 import $ from 'jquery';
-import {MainStat, MStat} from './models/MainStat';
-import {OffensiveStat, DefensiveStat, BasicStat, Damage} from './models/Stat';
+import {MainStat, MStat} from './MainStat';
+import {OffensiveStat, DefensiveStat, BasicStat, Damage} from './Stat';
 
 
 export default class Build extends Component {
@@ -99,16 +99,16 @@ export default class Build extends Component {
             return (
                 <form onSubmit={this.computeStats}>
                     <div>
-                        <MainStat updatePlayer={this.updatePlayer} computeCircle={this.computeCircle}
-                               firstCircles={this.state.circles} classSelect="first" number={1}/>
+                        <MainStat className="first main-stat" updatePlayer={this.updatePlayer} computeCircle={this.computeCircle}
+                               firstCircles={this.state.circles} classSelect="first-select select" number={1}/>
                         <table className="first-circle tb-data">
                             <BasicStat basicStat={this.state.c1.basicStat}/>
                             <OffensiveStat offensiveStat={this.state.c1.offensiveStat}/>
                             <DefensiveStat defensiveStat={this.state.c1.defensiveStat}/>
                         </table>
                         <Damage className="first-damage" damage={this.state.d1} dodge={this.state.e1}/>
-                        <MainStat updatePlayer={this.updatePlayer} computeCircle={this.computeCircle}
-                               firstCircles={this.state.circles} classSelect="second" number={2}/>
+                        <MainStat  className="second main-stat" updatePlayer={this.updatePlayer} computeCircle={this.computeCircle}
+                               firstCircles={this.state.circles} classSelect="second-select select" number={2}/>
                         <table className="second-circle tb-data">
                             <BasicStat basicStat={this.state.c2.basicStat}/>
                             <OffensiveStat offensiveStat={this.state.c2.offensiveStat}/>
@@ -124,10 +124,10 @@ export default class Build extends Component {
             return (
                 <form onSubmit={this.computeStats}>
                     <div>
-                        <MainStat updatePlayer={this.updatePlayer} computeCircle={this.computeCircle}
-                               firstCircles={this.state.circles} classSelect="second" number={1}/>
-                        <MainStat updatePlayer={this.updatePlayer} computeCircle={this.computeCircle}
-                               firstCircles={this.state.circles} classSelect="second" number={2}/>
+                        <MainStat className="first main-stat" updatePlayer={this.updatePlayer} computeCircle={this.computeCircle}
+                               firstCircles={this.state.circles} classSelect="first-select" number={1}/>
+                        <MainStat className="second main-stat" updatePlayer={this.updatePlayer} computeCircle={this.computeCircle}
+                               firstCircles={this.state.circles} classSelect="second-select" number={2}/>
                     </div>
                     <input type="submit" value="compute"/>
                 </form>

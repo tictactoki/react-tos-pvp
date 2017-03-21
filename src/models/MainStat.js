@@ -50,13 +50,13 @@ export class MainStat extends React.Component {
             player['mainStat'] = select.value;
             player['level'] = 1;
             this.setState({player: player});
-            this.props.updatePlayer(this.props.number,player);
+            this.props.updatePlayer(this.props.number, player);
         }
     }
 
     render() {
         return (
-            <div>
+            <div className={this.props.className}>
                 <Select
                     name="form-field-name"
                     value={this.state.player.label}
@@ -64,38 +64,43 @@ export class MainStat extends React.Component {
                     onChange={this.handleSelect}
                     className={this.props.classSelect}
                 />
-                <ul>
-                    <li>
-                        <label>level</label>
-                        <input type="number" value={this.state.player.level}
-                               onChange={this.handleChange.bind(this, 'level')}/>
-                    </li>
-                    <li>
-                        <label>str</label>
-                        <input type="number" value={this.state.player.mainStat.str}
-                               onChange={this.handleMainStat.bind(this, 'str')}/>
-                    </li>
-                    <li>
-                        <label>con</label>
-                        <input type="number" value={this.state.player.mainStat.con}
-                               onChange={this.handleMainStat.bind(this, 'con')}/>
-                    </li>
-                    <li>
-                        <label>int</label>
-                        <input type="number" value={this.state.player.mainStat.int}
-                               onChange={this.handleMainStat.bind(this, 'int')}/>
-                    </li>
-                    <li>
-                        <label>spr</label>
-                        <input type="number" value={this.state.player.mainStat.spr}
-                               onChange={this.handleMainStat.bind(this, 'spr')}/>
-                    </li>
-                    <li>
-                        <label>dex</label>
-                        <input type="number" value={this.state.player.mainStat.dex}
-                               onChange={this.handleMainStat.bind(this, 'dex')}/>
-                    </li>
-                </ul>
+                <table>
+                    <tbody>
+                    <tr>
+                        <th>level</th>
+                        <th>str</th>
+                        <th>con</th>
+                        <th>int</th>
+                        <th>spr</th>
+                        <th>dex</th>
+                    </tr>
+                    <tr>
+                        <td><input type="number" value={this.state.player.level}
+                                   onChange={this.handleChange.bind(this, 'level')}/>
+                        </td>
+                        <td>
+                            <input type="number" value={this.state.player.mainStat.str}
+                                   onChange={this.handleMainStat.bind(this, 'str')}/>
+                        </td>
+                        <td>
+                            <input type="number" value={this.state.player.mainStat.con}
+                                   onChange={this.handleMainStat.bind(this, 'con')}/>
+                        </td>
+                        <td>
+                            <input type="number" value={this.state.player.mainStat.int}
+                                   onChange={this.handleMainStat.bind(this, 'int')}/>
+                        </td>
+                        <td>
+                            <input type="number" value={this.state.player.mainStat.spr}
+                                   onChange={this.handleMainStat.bind(this, 'spr')}/>
+                        </td>
+                        <td>
+                            <input type="number" value={this.state.player.mainStat.dex}
+                                   onChange={this.handleMainStat.bind(this, 'dex')}/>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         );
     }
