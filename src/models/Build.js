@@ -98,24 +98,36 @@ export default class Build extends Component {
         if (this.state.c1 != null && this.state.c2 != null && this.state.circles != null) {
             return (
                 <form onSubmit={this.computeStats}>
-                    <div>
-                        <MainStat className="first main-stat" updatePlayer={this.updatePlayer} computeCircle={this.computeCircle}
-                               firstCircles={this.state.circles} classSelect="first-select select" number={1}/>
-                        <table className="first-circle tb-data">
-                            <BasicStat basicStat={this.state.c1.basicStat}/>
-                            <OffensiveStat offensiveStat={this.state.c1.offensiveStat}/>
-                            <DefensiveStat defensiveStat={this.state.c1.defensiveStat}/>
-                        </table>
-                        <Damage className="first-damage" damage={this.state.d1} dodge={this.state.e1}/>
-                        <MainStat  className="second main-stat" updatePlayer={this.updatePlayer} computeCircle={this.computeCircle}
-                               firstCircles={this.state.circles} classSelect="second-select select" number={2}/>
-                        <table className="second-circle tb-data">
-                            <BasicStat basicStat={this.state.c2.basicStat}/>
-                            <OffensiveStat offensiveStat={this.state.c2.offensiveStat}/>
-                            <DefensiveStat defensiveStat={this.state.c2.defensiveStat}/>
-                        </table>
-                        <Damage className="second-damage" damage={this.state.d2} dodge={this.state.e2}/>
-                    </div>
+                    <table>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <MainStat className="first main-stat" updatePlayer={this.updatePlayer}
+                                          computeCircle={this.computeCircle}
+                                          firstCircles={this.state.circles} classSelect="first-select select"
+                                          number={1}/>
+                                <table className="first-circle tb-data">
+                                    <BasicStat basicStat={this.state.c1.basicStat}/>
+                                    <OffensiveStat offensiveStat={this.state.c1.offensiveStat}/>
+                                    <DefensiveStat defensiveStat={this.state.c1.defensiveStat}/>
+                                </table>
+                                <Damage className="first-damage" damage={this.state.d1} dodge={this.state.e1}/>
+                            </td>
+                            <td>
+                                <MainStat className="second main-stat" updatePlayer={this.updatePlayer}
+                                          computeCircle={this.computeCircle}
+                                          firstCircles={this.state.circles} classSelect="second-select select"
+                                          number={2}/>
+                                <table className="second-circle tb-data">
+                                    <BasicStat basicStat={this.state.c2.basicStat}/>
+                                    <OffensiveStat offensiveStat={this.state.c2.offensiveStat}/>
+                                    <DefensiveStat defensiveStat={this.state.c2.defensiveStat}/>
+                                </table>
+                                <Damage className="second-damage" damage={this.state.d2} dodge={this.state.e2}/>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
                     <input type="submit" value="compute"/>
                 </form>
             );
@@ -123,12 +135,21 @@ export default class Build extends Component {
         else if (this.state.circles != null) {
             return (
                 <form onSubmit={this.computeStats}>
-                    <div>
-                        <MainStat className="first main-stat" updatePlayer={this.updatePlayer} computeCircle={this.computeCircle}
-                               firstCircles={this.state.circles} classSelect="first-select" number={1}/>
-                        <MainStat className="second main-stat" updatePlayer={this.updatePlayer} computeCircle={this.computeCircle}
-                               firstCircles={this.state.circles} classSelect="second-select" number={2}/>
-                    </div>
+                    <table>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <MainStat className="first main-stat" updatePlayer={this.updatePlayer}
+                                          computeCircle={this.computeCircle}
+                                          firstCircles={this.state.circles} classSelect="first-select" number={1}/>
+                            </td>
+                            <td><MainStat className="second main-stat" updatePlayer={this.updatePlayer}
+                                          computeCircle={this.computeCircle}
+                                          firstCircles={this.state.circles} classSelect="second-select" number={2}/>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
                     <input type="submit" value="compute"/>
                 </form>
             );

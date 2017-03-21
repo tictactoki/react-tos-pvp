@@ -10,12 +10,49 @@ form {
   margin-bottom: 5%;
 }
 
-li input {
-  width: 25px;
+td input {
+  width: 35px;
+}
+
+th {
+  width: 15px;
+}
+
+td {
+  width: 5%;
+}
+
+.select {
+  width: 30%;
+
+}
+
+.table-stat {
+  width: 30%;
+}
+
+.main {
+  position: relative;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.first-player {
+  position: relative;
+  width: 30%;
+  height: 100%;
+}
+
+.second-player {
+  position: absolute;
+  width: 30%;
+  height: 100%;
 }
 
 .main-stat {
-  position: relative;
+  width: 30%;
+  height: 100%;
+  /*position: relative;*/
   top: 40px;
   left: 40px;
   margin-bottom: 5%;
@@ -23,6 +60,7 @@ li input {
 
 .Select-control {
   width: 120px;
+  height: 10px;
 }
 
 .is-open {

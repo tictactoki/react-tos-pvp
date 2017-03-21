@@ -64,7 +64,7 @@ export class MainStat extends React.Component {
                     onChange={this.handleSelect}
                     className={this.props.classSelect}
                 />
-                <table>
+                <table className="table-stat">
                     <tbody>
                     <tr>
                         <th>level</th>
